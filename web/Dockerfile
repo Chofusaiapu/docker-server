@@ -7,6 +7,9 @@ RUN yum install -y epel-release && \
 	yum -y install https://repo.ius.io/ius-release-el7.rpm && \
 	sed -i -e "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/ius.repo && \
 	sed -i -e "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/epel.repo
+
+RUN yum remove -y httpd-tools-2.4.6-99.el7.centos.1.x86_64 && \
+	yum remove -y httpd-2.4.6-99.el7.centos.1.x86_64
 RUN yum --enablerepo=epel -y install nghttp2 && \
 	yum -y install epel-release && \
 	yum -y install mailcap system-logos && \
@@ -24,6 +27,8 @@ RUN mkdir -p /etc/ssl/private && \
 	openssl req -new -newkey rsa:2048 -nodes -out /etc/ssl/private/server.csr -keyout /etc/ssl/private/server.key -subj "/C=/ST=/L=/O=/OU=/CN=*.lvh.me" && \
 	openssl x509 -days 3650 -req -signkey /etc/ssl/private/server.key -in /etc/ssl/private/server.csr -out /etc/ssl/private/server.crt
 
+RUN mkdir /virtual virtual/chofusai virtual/chofusai/public_html  virtual/chofusai/public_html/cgi-bin
+	
 COPY docker.conf /etc/httpd/conf.d/docker.conf
 
 # dockre can not use systemd without permission, apahce is started with httpd

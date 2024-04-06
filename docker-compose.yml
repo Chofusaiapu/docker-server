@@ -9,7 +9,7 @@ services:
     depends_on:
       - php
     volumes:
-      - ./code:/var/www/html
+      - ./code:/virtual/chofusai/public_html
       - ./web/logs:/var/log/httpd
       - cert:/etc/ssl/private
     restart: always
@@ -22,7 +22,7 @@ services:
     ports:
       - '9000'
     volumes:
-      - ./code:/var/www/html
+      - ./code:/virtual/chofusai/public_html
     restart: always
     env_file: .env
     # For site relation
