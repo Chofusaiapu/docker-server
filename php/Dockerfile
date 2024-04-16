@@ -286,5 +286,7 @@ RUN set -x \
 	&& PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
 	&& if [ -n "${PHP_ERROR}" ]; then echo "${PHP_ERROR}"; false; fi
 
+RUN docker-php-ext-install pdo_mysql
+
 EXPOSE 9000
 CMD ["php-fpm"]

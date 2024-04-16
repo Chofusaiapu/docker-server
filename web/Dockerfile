@@ -31,5 +31,7 @@ RUN mkdir /virtual virtual/chofusai virtual/chofusai/public_html  virtual/chofus
 	
 COPY docker.conf /etc/httpd/conf.d/docker.conf
 
+RUN	chown apache:apache /virtual/chofusai/public_html/*  
+
 # dockre can not use systemd without permission, apahce is started with httpd
 CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
